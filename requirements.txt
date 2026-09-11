@@ -3,3 +3,5 @@ uvicorn
 ollama
 PyMuPDF
 python-pptx
+chromadb
+langchain-text-splitters
