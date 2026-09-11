@@ -1,0 +1,21 @@
+# Environments
+.venv/
+venv/
+ENV/
+env/
+
+# Python byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Database files
+*.db
+*.sqlite3
+
+# Vector DB / Local storage
+chroma_db/
+
+# System files
+.DS_Store
+Thumbs.db
