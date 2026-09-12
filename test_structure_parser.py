@@ -1,32 +1,15 @@
 import sys
-from structure_parser import extract_exam_skeleton
+from structure_parser import extract_exam_skeleton, StructureExtractionError
 
-def main():
-    if len(sys.argv) < 2:
-        print("Usage: python test_structure_parser.py <path_to_past_paper>")
-        return
+if len(sys.argv) < 2:
+    print("Usage: python test_structure_parser.py <path_to_exam_pdf>")
+    sys.exit(1)
 
-    file_path = sys.argv[1]
-    print(f"Processing past paper: {file_path}...\n")
+file_path = sys.argv[1]
 
+try:
     skeleton = extract_exam_skeleton(file_path)
-
-    print("\n=== Extracted Exam Skeleton ===")
-    print(f"Title: {skeleton.title}")
-    print(f"Total Marks: {skeleton.total_marks}")
-    print(f"Time Allowed: {skeleton.time_allowed}")
-    print(f"Instructions: {skeleton.instructions}")
-    print(f"Number of Sections: {len(skeleton.sections)}\n")
-
-    for section in skeleton.sections:
-        print(f"[{section.section_name}] ({section.total_marks} Marks)")
-        print(f"Question Count: {len(section.questions)}")
-        for q in section.questions:
-            print(f"  - {q.question_number} ({q.question_type}, {q.total_marks} marks total)")
-            if q.sub_questions:
-                for sub in q.sub_questions:
-                    print(f"      * {sub.label}: {sub.marks} marks")
-        print("-" * 40)
-
-if __name__ == "__main__":
-    main()
+    print("\n--- Extracted Exam Skeleton ---")
+    print(skeleton.model_dump_json(indent=2))
+except StructureExtractionError as e:
+    print(f"\n[FAILED] Structure extraction failed for '{file_path}': {e}")

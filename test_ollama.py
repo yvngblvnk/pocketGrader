@@ -1,7 +1,7 @@
 import ollama
 
 def test_ollama_connection():
-    # Adjust model_name if you are using a different local model (e.g., 'llama3.2', 'mistral')
+    # Adjust model_name if you are using a different local model (e.g., 'gemma3:4b', 'mistral')
     model_name = "gemma3:4b"
     
     print(f"Testing connection to Ollama using model: {model_name}...")
